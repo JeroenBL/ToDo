@@ -229,3 +229,32 @@ namespace Todo.Blazor.Services
     }
 }
 ```
+
+# Stap 5 - Setup Dependency Injection
+
+1. Open vanuit VS het project `Todo.Blazor`.
+
+2. Voeg de volgende twee NUGET packages toe aan het `Todo.Blazor` project.
+    - https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/5.0.9
+    - https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/5.0.9
+
+> Zonder deze packages kun je de volgende stappen niet uitvoeren!
+
+2. Open de file `Startup.cs`.
+
+3. Op regel 32, voeg toe: `services.AddEntityFrameworkSqlite().AddDbContext<ApplicationDbContext>();`
+
+4. Op regel 33, voeg toe: `services.AddScoped<IToDoService, ToDoService>();`
+
+> Indien je een 'compile' error krijgt, sluit VS en start opnieuw!
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddRazorPages();
+    services.AddServerSideBlazor();
+    services.AddSingleton<WeatherForecastService>();
+    services.AddEntityFrameworkSqlite().AddDbContext<ApplicationDbContext>();
+    services.AddScoped<IToDoService, ToDoService>();
+}
+```
