@@ -88,10 +88,44 @@ Als alles goed is zou je nu in de bin folder een `todo.db` moeten zien staan met
 
 > dotnet watch run start de browser met de applicatie. Sluit de browser niet af!
 
-8. Open /Pages/_Host.cshtml
+8. Open `/Pages/_Host.cshtml`
 
 9. Verander de `title` op regel 13 naar bv. `Todo`.
 
 10. Save via `CTRL+S`.
 
 11. Ga terug naar de browser en let de title van de browser tab.
+
+# Stap 3 - Aanpassen counter
+
+> In VS: Open de `Package manager console`. Vanuit project root van `Todo.Blazor` type: `dotnet watch run`
+
+1. Open de browser en ga naar de `Counter` pagina.
+
+> Op dit moment doet de counter nog weinig, maar we kunnen er een UI element aan toevoegen.
+
+2. Ga naar VS en open `Pages/Counter.razor`
+
+3. Voeg op regel 8 de volgende code toe:
+
+```html
+    <input @bind="incrementBy"/>
+```
+
+4. Voeg in het `@code block` de volgende code toe:
+
+```csharp
+    private int incrementBy;
+```
+
+5. In de functie `private void IncrementCount()` wijzig ` currentCount++;` in:
+
+```charp
+    currentCount+=incrementBy;
+```
+
+6. Save via `CTRL+S`.
+
+7. Browse naar de `Counter` pagina en zie dat er een nieuw UI element is bijgekomen.
+
+![counter](./assets/counter.png)
