@@ -9,7 +9,7 @@ Blazor Todo app (start-to-finish)
 2. Maak een nieuw VS project. .NET Core 3.1 class library met de naam: `Todo.DataAccess`
 3. Delete `Class1.cs`
 4. Voeg de volgende drie NUGET packages toe:
-    - https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/5.0.9
+    - https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/5.0.9
     - https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/5.0.9
     - https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/5.0.9
 5. Voeg twee nieuwe folders toe met de naam: `Models` en `Data`
