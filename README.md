@@ -129,8 +129,6 @@ Als alles goed is zou je nu in de bin folder een `todo.db` moeten zien staan met
 7. Browse naar de `Counter` pagina en zie dat er een nieuw UI element is bijgekomen.
 
 ![counter](./assets/counter.png)
-<<<<<<< Updated upstream
-=======
 
 # Stap 4 - Toevoegen db crud methodes
 
