@@ -129,3 +129,103 @@ Als alles goed is zou je nu in de bin folder een `todo.db` moeten zien staan met
 7. Browse naar de `Counter` pagina en zie dat er een nieuw UI element is bijgekomen.
 
 ![counter](./assets/counter.png)
+<<<<<<< Updated upstream
+=======
+
+# Stap 4 - Toevoegen db crud methodes
+
+1. Open vanuit VS het project `Todo.Blazor`.
+
+2. Voeg een nieuwe folder `Services` toe.
+
+3. Maak een nieuwe CS Interface class. `IToDoService`.
+
+```csharp
+using DataAccess.Models;
+using System.Collections.Generic;
+
+namespace Todo.Blazor.Services
+{
+    public interface IToDoService
+    {
+        //Create
+        ToDo Create (ToDo todo);
+
+        //Read
+        ToDo Get(int id);
+
+        //Update
+        ToDo Update(ToDo todo);
+
+        //Delete
+        void Delete(int id);
+
+        //List
+        List<ToDo> ListAll();
+    }
+}
+```
+
+4. Maak een nieuwe CS class. `ToDoService`
+
+5. Inherit van: `IToDoService`.
+
+```csharp
+using DataAccess.Data;
+using DataAccess.Models;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Todo.Blazor.Services
+{
+    public class ToDoService : IToDoService
+    {
+        private readonly ApplicationDbContext _db;
+
+        public ToDoService(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+
+        public ToDo Create(ToDo todo)
+        {
+           var newTodo = _db.Todo.Add(todo);
+            _db.SaveChanges();
+
+            return newTodo.Entity;
+        }
+
+        public void Delete(int id)
+        {
+            var todo = _db.Todo.Find(id);
+            if (todo != null)
+            {
+                _db.Todo.Remove(todo);
+                _db.SaveChanges();
+            };
+        }
+
+        public ToDo Get(int id)
+        {
+            return _db.Todo.Find(id);
+        }
+
+        public ToDo Update(ToDo todo)
+        {
+            var dbTodo = _db.Todo.Find(todo.Id);
+            if (dbTodo != null)
+            {
+                dbTodo = todo;
+                _db.SaveChanges();
+            }
+
+            return dbTodo;
+        }
+
+        public List<ToDo> ListAll()
+        {
+            return _db.Todo.ToList();
+        }
+    }
+}
+```
