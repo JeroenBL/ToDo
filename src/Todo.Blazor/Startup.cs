@@ -1,3 +1,4 @@
+using DataAccess.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Todo.Blazor.Data;
+using Todo.Blazor.Services;
 
 namespace Todo.Blazor
 {
@@ -29,6 +31,8 @@ namespace Todo.Blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddEntityFrameworkSqlite().AddDbContext<ApplicationDbContext>();
+            services.AddScoped<IToDoService, ToDoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
