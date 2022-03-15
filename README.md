@@ -61,8 +61,37 @@ namespace DataAccess.Data
 
 8. Open de `Package manager console` en type: `Add-Migration Initial`
 
-9. Open de `Package manager console` en type: `Update-Database`.
+9. Open de `Package manager console` en type: `Update-Database`.kLik
 
 Als alles goed is zou je nu in de bin folder een `todo.db` moeten zien staan met daarin een tabel `Todo`
 
 10. Download DBBrowser for Sqlite van: https://sqlitebrowser.org/ om te database te managen.
+
+## Stap 2 - Toevoegen Blazor ServerSide App
+
+1. Klik rechts op de solution en click op: `Add -> New project`.
+
+2. Kies voor een: `Blazor ServerSide` of `Blazor Server App`.
+
+3. Kies als naam voor het project: `Todo.Blazor`.
+
+4. Bij `Additional information` selecteer:
+    - .NET Core 3.1
+    - Authentication: None
+    - Configure for HTTPS
+
+5. Zet de `Todo.Blazor` app als startup project.
+
+6. Open de `Package manager console`.
+
+7. Zorg dat je in de project root van `Todo.Blazor` staat en type: `dotnet watch run`
+
+> dotnet watch run start de browser met de applicatie. Sluit de browser niet af!
+
+8. Open /Pages/_Host.cshtml
+
+9. Verander de `title` op regel 13 naar bv. `Todo`.
+
+10. Save via `CTRL+S`.
+
+11. Ga terug naar de browser en let de title van de browser tab.
