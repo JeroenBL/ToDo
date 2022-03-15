@@ -246,6 +246,8 @@ namespace Todo.Blazor.Services
 
 4. Op regel 33, voeg toe: `services.AddScoped<IToDoService, ToDoService>();`
 
+> Vergeet niet de using statements toe te voegen.
+
 > Indien je een 'compile' error krijgt, sluit VS en start opnieuw!
 
 ```csharp
