@@ -261,3 +261,12 @@ public void ConfigureServices(IServiceCollection services)
     services.AddScoped<IToDoService, ToDoService>();
 }
 ```
+
+# Stap 6 - Voeg een record toe aan de Sqlite database
+
+1. Open DBBrowser for Sqlite of execute via een VSCode extensions.
+
+```sql
+INSERT INTO Todo (Id,Title,Description,DateCreated,DateUpdated)
+VALUES (1, 'MyFirstTodo', 'My very first todo', '16-03-2022', '16-03-2022');
+```
