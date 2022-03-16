@@ -60,11 +60,11 @@ namespace Todo.DataAccess.Data
 
 8. Open de `Package manager console` en type: `Add-Migration Initial`
 
-9. Open de `Package manager console` en type: `Update-Database`.kLik
+9. Open de `Package manager console` en type: `Update-Database`.
 
-Als alles goed is zou je nu in de bin folder een `todo.db` moeten zien staan met daarin een tabel `Todo`
+Als alles goed is zou je nu in `c:\temp\Todo` een `todo.db` moeten zien staan met daarin een tabel `Todo`
 
-10. Download DBBrowser for Sqlite van: https://sqlitebrowser.org/ om te database te managen.
+10. Download DBBrowser for Sqlite van: https://sqlitebrowser.org/ of een Sqlite VSCode extension om te database te managen.
 
 ## Stap 2 - Toevoegen Blazor ServerSide App
 
