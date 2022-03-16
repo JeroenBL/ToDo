@@ -18,7 +18,7 @@ Blazor Todo app (start-to-finish)
 ```csharp
 using System;
 
-namespace DataAccess.Models
+namespace Todo.DataAccess.Models
 {
     // De naam van de class is tevens de naam van de tabel in de database.
     // Hier moet je van te voren goed over nadenken.
@@ -28,8 +28,8 @@ namespace DataAccess.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateUpdated { get; set; }
+        public string DateCreated { get; set; }
+        public string DateUpdated { get; set; }
     }
 }
 ```
@@ -37,11 +37,11 @@ namespace DataAccess.Models
 7. Maak in de folder `Data` de volgende CS class:
 
 ```csharp
-using DataAccess.Models;
+using Todo.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace DataAccess.Data
+namespace Todo.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -139,7 +139,7 @@ Als alles goed is zou je nu in de bin folder een `todo.db` moeten zien staan met
 3. Maak een nieuwe CS Interface class. `IToDoService`.
 
 ```csharp
-using DataAccess.Models;
+using Todo.DataAccess.Models;
 using System.Collections.Generic;
 
 namespace Todo.Blazor.Services
@@ -169,8 +169,8 @@ namespace Todo.Blazor.Services
 5. Inherit van: `IToDoService`.
 
 ```csharp
-using DataAccess.Data;
-using DataAccess.Models;
+using Todo.DataAccess.Data;
+using Todo.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -188,8 +188,8 @@ namespace Todo.Blazor.Services
 
         public ToDo Create(ToDo todo)
         {
-            todo.DateCreated = DateTime.Now;
-            todo.DateUpdated = DateTime.Now;
+            todo.DateCreated = DateTime.Now.ToShortDateString();
+            todo.DateUpdated = DateTime.Now.ToShortDateString();
             var newTodo = _db.Todo.Add(todo);
             _db.SaveChanges();
 
@@ -217,7 +217,7 @@ namespace Todo.Blazor.Services
             if (dbTodo != null)
             {
                 dbTodo = todo;
-                dbTodo.DateUpdated = DateTime.Now;
+                dbTodo.DateUpdated = DateTime.Now.ToShortDateString();
                 _db.SaveChanges();
             }
 
