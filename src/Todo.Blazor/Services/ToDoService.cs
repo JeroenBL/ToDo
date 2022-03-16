@@ -1,5 +1,5 @@
-﻿using DataAccess.Data;
-using DataAccess.Models;
+﻿using Todo.DataAccess.Data;
+using Todo.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +17,8 @@ namespace Todo.Blazor.Services
 
         public ToDo Create(ToDo todo)
         {
-            todo.DateCreated = DateTime.Now;
-            todo.DateUpdated = DateTime.Now;
+            todo.DateCreated = DateTime.Now.ToShortDateString();
+            todo.DateUpdated = DateTime.Now.ToShortDateString();
             var newTodo = _db.Todo.Add(todo);
             _db.SaveChanges();
 
@@ -46,7 +46,7 @@ namespace Todo.Blazor.Services
             if (dbTodo != null)
             {
                 dbTodo = todo;
-                dbTodo.DateUpdated = DateTime.Now;
+                dbTodo.DateUpdated = DateTime.Now.ToShortDateString();
                 _db.SaveChanges();
             }
 

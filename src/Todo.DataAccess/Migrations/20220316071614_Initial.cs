@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Todo.DataAccess.Migrations
 {
@@ -15,8 +14,8 @@ namespace Todo.DataAccess.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    DateCreated = table.Column<string>(type: "TEXT", nullable: true),
+                    DateUpdated = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
