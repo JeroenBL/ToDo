@@ -4,6 +4,7 @@
 @using Services;
 
 @inject IToDoService _todoService
+@inject NavigationManager _navigationManager
 
 <h3>Todo's</h3>
 
@@ -29,7 +30,7 @@
         {
             foreach (var todo in Todos)
             {
-                 <tr>
+                 <tr @onclick="() => RedirectTo(todo.Id)" class="cursor-pointer">
                     <th scope="row">@todo.Id</th>
                     <td>@todo.Title</td>
                     <td>@todo.Description</td>
@@ -47,5 +48,10 @@
     protected override async Task OnInitializedAsync()
     {
         Todos = _todoService.ListAll();
+    }
+
+    private void RedirectTo(int todoId)
+    {
+        _navigationManager.NavigateTo($"/todo/details/{todoId}");
     }
 }

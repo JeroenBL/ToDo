@@ -348,3 +348,42 @@ VALUES (1, 'MyFirstTodo', 'My very first todo', '16-03-2022', '16-03-2022');
 > Als alles goed is uitgevoerd zou je nu een tabel moeten zien met daarin de aangemaakte Todo in de database.
 
 ![todoList](./assets/todoList.png)
+
+# Stap 8 - Voorbereiding TodoDetails razor page
+
+1. Open file: `pages/Todo/TodoList.razor`.
+
+2. Voeg toe op regel 7 de `navigionManager toe`.
+
+```csharp
+@inject NavigationManager _navigationManager
+```
+
+3. Pas regel 33 (binnen het `<tr>` block in de foreach) als volgt aan:
+
+```html
+<tr @onclick="() => RedirectTo(todo.Id)" class="cursor-pointer">
+```
+
+4. Voeg de volgende method toe op regel 61 (binnen het `@code` block):
+
+```csharp
+private void RedirectTo(int todoId)
+{
+    _navigationManager.NavigateTo($"/todo/details/{todoId}");
+}
+```
+
+5. Open de file: `wwwroot/css/site.css`
+
+6. Scroll naar het einde van de file en voeg toe op regel 184 de volgende css:
+
+```css
+.cursor-pointer {
+    cursor: pointer;
+}
+```
+
+![todoListCursorPointer](./assets/todoListCursorPointer.png)
+
+![todoDetailsEmpty](./assets/todoDetailsEmpty.png)
