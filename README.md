@@ -386,4 +386,4 @@ private void RedirectTo(int todoId)
 
 ![todoListCursorPointer](./assets/todoListCursorPointer.png)
 
-![todoDetailsEmpty](./assets/todoDetailsEmpty.png)
+![todoDetailsEmpty](./assets/TodoDetailsEmpty.png)
