@@ -12,8 +12,7 @@ namespace Todo.DataAccess.Data
         {
             // Locatie naar de DB. Nu Sqlite. Maar dit kan ook SQL of MongoDB zijn.
             // Het werkt allemaal op dezelfde wijze.
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            var conn = $@"Data Source={baseDir}\\todo.db";
+            var conn = @"Data Source=c:\\temp\\Todo\\todo.db";
             optionsBuilder.UseSqlite(conn);
         }
     }
