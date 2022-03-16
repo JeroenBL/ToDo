@@ -270,3 +270,81 @@ public void ConfigureServices(IServiceCollection services)
 INSERT INTO Todo (Id,Title,Description,DateCreated,DateUpdated)
 VALUES (1, 'MyFirstTodo', 'My very first todo', '16-03-2022', '16-03-2022');
 ```
+
+# Stap 7 - Nieuwe razor pagina
+
+> In VS: Open de `Package manager console`. Vanuit project root van `Todo.Blazor` type: `dotnet watch run`
+
+1. Open VS. Maak in het project `Todo.Blazor` in de `Pages` folder een nieuwe folder met de naam: `Todo`.
+
+2. Maak in de folder `Todo` een nieuw `Razor component` met de naam: `TodoList.razor`.
+
+```html
+@page "/todos"
+
+@using DataAccess.Models;
+@using Services;
+
+@inject IToDoService _todoService
+
+<h3>Todo's</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">DateCreated</th>
+      <th scope="col">DateUpdated</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (!Todos.Any())
+    {
+        <tr>
+            <th scope="row" colspan="5">No todo's are currently available</th>
+            </tr>
+        }
+
+        else
+        {
+            foreach (var todo in Todos)
+            {
+                 <tr>
+                    <th scope="row">@todo.Id</th>
+                    <td>@todo.Title</td>
+                    <td>@todo.Description</td>
+                    <td>@todo.DateCreated</td>
+                    <td>@todo.DateUpdated</td>
+                </tr>
+            }
+        }
+  </tbody>
+</table>
+
+@code {
+    List<ToDo> Todos = new List<ToDo>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Todos = _todoService.ListAll();
+    }
+}
+```
+
+3. Open file: `Shared/NavMenu.razor`.
+
+4. In het code block van: `@NavMenuCssClass` voeg de volgende `NavLink` toe:
+
+```html
+<li class="nav-item px-3">
+    <NavLink class="nav-link" href="todos">
+        <span class="oi oi-task" aria-hidden="true"></span> Todo's
+    </NavLink>
+</li>
+```
+
+> Als alles goed is uitgevoerd zou je nu een tabel moeten zien met daarin de aangemaakte Todo in de database.
+
+![todoList](./assets/todoList.png)
