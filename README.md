@@ -171,6 +171,7 @@ namespace Todo.Blazor.Services
 ```csharp
 using DataAccess.Data;
 using DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -187,7 +188,9 @@ namespace Todo.Blazor.Services
 
         public ToDo Create(ToDo todo)
         {
-           var newTodo = _db.Todo.Add(todo);
+            todo.DateCreated = DateTime.Now;
+            todo.DateUpdated = DateTime.Now;
+            var newTodo = _db.Todo.Add(todo);
             _db.SaveChanges();
 
             return newTodo.Entity;
@@ -214,6 +217,7 @@ namespace Todo.Blazor.Services
             if (dbTodo != null)
             {
                 dbTodo = todo;
+                dbTodo.DateUpdated = DateTime.Now;
                 _db.SaveChanges();
             }
 
