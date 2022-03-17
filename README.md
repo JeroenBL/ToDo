@@ -442,3 +442,47 @@ private void RedirectTo(int todoId)
 ```
 
 ![todoDetails](./assets/todoDetails.png)
+
+# Stap 10 - Configureer blazored toast
+
+1. Open het project `Todo.Blazor`
+
+2. Installeer nuget package: `Blazored.Toast` https://www.nuget.org/packages/Blazored.Toast/3.2.2
+
+3. Open cs file `Startup.cs`
+
+4. Binnen de method `ConfigureServices` voeg op regel 37 de volgende code toe:
+
+```csharp
+ services.AddBlazoredToast();
+ ```
+
+> Importeer de juiste using statements!
+
+5. Open de file `_Imports.razor`
+
+6. Voeg de volgende twee regels code toe:
+
+```csharp
+@using Blazored.Toast
+@using Blazored.Toast.Services
+```
+
+7. Open de file `_Hosts.cshtml`
+
+8. Binnen het `<head></head>` code block, voeg de volgende regel code toe:
+
+```html
+<link href="_content/Blazored.Toast/blazored-toast.min.css" rel="stylesheet" />
+```
+
+9. Open de file 'Sharerd\MainLayout.razor`
+
+10. Voeg toe op regel op regel 6 (direct onder het `<div class="sidebar">/div` element)
+
+```html
+<BlazoredToasts Position="ToastPosition.BottomRight"
+                Timeout="10"/>
+```
+
+> Vergeet niet het using statement toe te voegen: `@using Blazored.Toast.Configuration`
