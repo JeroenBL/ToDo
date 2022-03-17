@@ -440,3 +440,5 @@ private void RedirectTo(int todoId)
     }
 }
 ```
+
+![todoDetails](./assets/todoDetails.png)
