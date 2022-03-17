@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Todo.Blazor.Data;
 using Todo.Blazor.Services;
+using Blazored.Toast;
 
 namespace Todo.Blazor
 {
@@ -33,6 +34,7 @@ namespace Todo.Blazor
             services.AddSingleton<WeatherForecastService>();
             services.AddEntityFrameworkSqlite().AddDbContext<ApplicationDbContext>();
             services.AddScoped<IToDoService, ToDoService>();
+            services.AddBlazoredToast();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
