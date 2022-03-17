@@ -476,7 +476,7 @@ private void RedirectTo(int todoId)
 <link href="_content/Blazored.Toast/blazored-toast.min.css" rel="stylesheet" />
 ```
 
-9. Open de file `Sharerd\MainLayout.razor`
+9. Open de file `Shared\MainLayout.razor`
 
 10. Voeg toe op regel op regel 6 (direct onder het `<div class="sidebar">/div` element)
 
@@ -486,3 +486,26 @@ private void RedirectTo(int todoId)
 ```
 
 > Importeer de juiste using statements!
+
+# Stap 11 - Toevoegen FontAwesome icons
+
+1. Open file `_Hosts.cshtml`
+
+2. Binnen het `<head></head>` code block en direct onder de regel `<base href="/">` voeg de volgende regel code toe:
+
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" referrerpolicy="no-referrer" crossorigin="anonymous" />
+```
+
+3. Open file `shared\NavMenu.razor`
+
+4. Pas -op regel 12- de regel `<span class="oi oi-home" aria-hidden="true"></span> Home` naar:
+
+```html
+<span class="fa-solid fa-house-chimney pr-3" aria-hidden="true"></span> Home
+```
+
+5. Verander vervolgens resp.,
+    - `oi oi-plus` naar: `fa-solid fa-calculator pr-3`
+    - `oi oi-list-rich` naar: `fa-solid fa-list pr-3`
+    - `oi oi-task` naar: `fa-solid fa-clipboard-check pr-3`
