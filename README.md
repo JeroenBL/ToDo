@@ -403,8 +403,6 @@ private void RedirectTo(int todoId)
 
 <div class="container d-flex justify-content-center m-0 p-0">
     <EditForm Model="@Todo" class="col-sm-12 col-md-10 col-lg-8 p-0">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
 
         <div class="form-group">
             <label for="title">Title</label>
