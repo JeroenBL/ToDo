@@ -93,7 +93,7 @@ Als alles goed is zou je nu in `c:\temp\Todo` een `todo.db` moeten zien staan me
 
 10. Save via `CTRL+S`.
 
-11. Ga terug naar de browser en let de title van de browser tab.
+11. Ga terug naar de browser en let op de title van de browser tab.
 
 # Stap 3 - Aanpassen counter
 
@@ -476,7 +476,7 @@ private void RedirectTo(int todoId)
 <link href="_content/Blazored.Toast/blazored-toast.min.css" rel="stylesheet" />
 ```
 
-9. Open de file 'Sharerd\MainLayout.razor`
+9. Open de file `Sharerd\MainLayout.razor`
 
 10. Voeg toe op regel op regel 6 (direct onder het `<div class="sidebar">/div` element)
 
@@ -485,4 +485,4 @@ private void RedirectTo(int todoId)
                 Timeout="10"/>
 ```
 
-> Vergeet niet het using statement toe te voegen: `@using Blazored.Toast.Configuration`
+> Importeer de juiste using statements!
