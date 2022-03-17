@@ -1,0 +1,48 @@
+﻿@page "/todo/details/{Id:int}"
+
+@using DataAccess.Models
+@using Services
+
+@inject IToDoService _todoService
+@inject NavigationManager _navigationManager
+
+<div class="container d-flex justify-content-center m-0 p-0">
+    <EditForm Model="@Todo" class="col-sm-12 col-md-10 col-lg-8 p-0">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <InputText id="title" @bind-Value="@Todo.Title" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <InputTextArea id="description" @bind-Value="@Todo.Description" class="form-control" rows="5" />
+        </div>
+
+        <div class="form-group">
+            <a href="/todos" class="btn btn-sm btn-secondary"><i class="fas fa-times pr-2"></i>Cancel</a>
+        </div>
+        @if (Id != null)
+        {
+            <hr />
+            <label>Created on: @Todo.DateCreated</label> <br />
+            <label>Updated on: @Todo.DateUpdated</label>
+        }
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] 
+    public int? Id { get; set; }
+    public ToDo Todo = new ToDo();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != null)
+        {
+            Todo = _todoService.Get(Id.Value);
+        }
+    }
+}
