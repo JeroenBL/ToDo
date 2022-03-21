@@ -574,7 +574,7 @@ protected void HandleOnValidSubmit()
 @page "/todo/create"
 ```
 
-5. Pas de `form-group` waarde buttons staan op regel 24 als volgt aan:
+5. Pas de `form-group` buttons regel 24 als volgt aan:
 
 ```html
 <div class="form-group">
