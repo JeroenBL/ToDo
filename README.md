@@ -612,10 +612,126 @@ protected void HandleOnValidSubmit()
 }
 ```
 
+# Stap 14 - Implementeer delete
 
+1. Open het project `Todo.Blazor`
 
+2. Installeer nuget package: `Blazored.Modal` https://www.nuget.org/packages/Blazored.Modal/6.0.1
 
+3. Open cs file `Startup.cs`
 
+4. Binnen de method `ConfigureServices` voeg op regel 37 de volgende code toe:
 
+```csharp
+services.AddBlazoredModal();
+ ```
 
+> Vergeet niet de juiste using statements te importeren.
 
+5. Open file `App.razor`
+
+6. Wrap het `Router` code block in de volgende block:
+
+```html
+<CascadingBlazoredModal>
+    <Router AppAssembly>
+    ...
+    </Router>
+</CascadingBlazoredModal>
+```
+
+7. Open file `_Imports.razor` en voeg de volgende using statements toe:
+
+```csharp
+@using Blazored.Modal;
+@using Blazored.Modal.Services;
+```
+
+8. Open file `_Hosts.cshtml`.
+
+9. Voeg de volgende CSS toe aan de `headers`.
+
+```html
+<link href="_content/Blazored.Modal/blazored-modal.css" rel="stylesheet" />
+```
+
+10. Voeg in de body (direct onder `<script src="_framework/blazor.server.js"></script>`) de volgende regel toe:
+
+```html
+<script src="_content/Blazored.Modal/blazored.modal.js"></script>
+```
+
+11. Voeg onder `Pages` een nieuwe folder toe genaamd `Components`.
+
+12. Maak een nieuw razor component met de naam `ConfirmationModal.razor`
+
+```csharp
+@page "/modal"
+
+@using Services
+@inject IToDoService _todoService;
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <h5>Are you sure you want to delete this todo?</h5>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col text-center">
+            <button type="button" class="btn btn-danger mr-3" @onclick="(async () => await DeleteTodo())">
+                <i class="fas fa-trash pr-2"></i>Yes
+            </button>
+            <button type="button" class="btn btn-secondary mr-3" @onclick="(async () => await ModalInstance.CancelAsync())">
+                <i class="fas fa-times pr-2"></i>Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+    [Parameter] public int TodoId { get; set; }
+
+    private async Task DeleteTodo()
+    {
+        _todoService.Delete(TodoId);
+        await ModalInstance.CloseAsync();
+    }
+}
+```
+
+13. Open de file `TodoDetails.razor.json`
+
+14. Voeg een nieuwe button toe direct onder de `Cancel` button.
+
+```html
+<button type="button" class="btn btn-sm btn-danger float-right" hidden="@(Id == null)" @onclick="(async () => await ShowConfirmationModal())"><i class="fas fa-trash pr-2"></i>Delete</button>
+```
+
+15. In het `@code` block; voeg een nieuwe parameter toe.
+
+```csharp
+[CascadingParameter] IModalService Modal { get; set; }
+```
+
+16. Voeg als laatste stap de volgende functie toe:
+
+```charp
+private async Task ShowConfirmationModal()
+{
+    var parameters = new ModalParameters();
+    parameters.Add("TodoId", Id);
+
+    var confirmationModal = Modal.Show<ConfirmationModal>("Delete todo?", parameters);
+    var result = await confirmationModal.Result;
+
+    if (!result.Cancelled)
+    {
+        _toastService.ShowSuccess("Todo has been deleted!", "Success!");
+        _navigationManager.NavigateTo("todos");
+    }
+}
+```
+
+> Vergeet niet de juiste using statements te importeren.

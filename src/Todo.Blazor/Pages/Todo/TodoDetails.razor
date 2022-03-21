@@ -3,6 +3,7 @@
 
 @using DataAccess.Models
 @using Services
+@using global::Todo.Blazor.Pages.Components
 
 @inject IToDoService _todoService
 @inject IToastService _toastService
@@ -25,6 +26,7 @@
             <button type="submit" class="btn btn-sm btn-primary" hidden="@(Id == null)"><i class="fas fa-save pr-2"></i>Save</button>
             <button type="submit" class="btn btn-sm btn-success" hidden="@(Id != null)"><i class="fas fa-plus pr-2"></i>Create</button>
             <a href="/todos" class="btn btn-sm btn-secondary"><i class="fas fa-times pr-2"></i>Cancel</a>
+            <button type="button" class="btn btn-sm btn-danger float-right" hidden="@(Id == null)" @onclick="(async () => await ShowConfirmationModal())"><i class="fas fa-trash pr-2"></i>Delete</button>
         </div>
         @if (Id != null)
         {
@@ -39,6 +41,8 @@
     [Parameter] 
     public int? Id { get; set; }
     public ToDo Todo = new ToDo();
+
+    [CascadingParameter] IModalService Modal { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,6 +73,21 @@
         catch (Exception ex)
         {
             _toastService.ShowError($"Error saving todo. Error: {ex.Message}");
+        }
+    }
+
+    private async Task ShowConfirmationModal()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("TodoId", Id);
+
+        var confirmationModal = Modal.Show<ConfirmationModal>("Delete todo?", parameters);
+        var result = await confirmationModal.Result;
+
+        if (!result.Cancelled)
+        {
+            _toastService.ShowSuccess("Todo has been deleted!", "Success!");
+            _navigationManager.NavigateTo("todos");
         }
     }
 }
