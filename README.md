@@ -554,3 +554,68 @@ protected void HandleOnValidSubmit()
 
 ![todoDetailsUpdate](./assets/TodoDetailsUpdate.png)
 
+# 13 - Implementeer create mogelijkheid
+
+1. Open file `Pages\Todo\TodoList.razor`
+
+2. Voeg toe direct onder het `<h3>Todo's</hr>` block:
+
+```csharp
+<button type="button" class="btn btn-sm btn-success" @onclick='() => _navigationManager.NavigateTo("todo/create")'>
+    <i class="fas fa-plus pr-2"></i>Create
+</button>
+```
+
+3. Open file `Pages\Todo\TodoDetails.razor`
+
+4. Voeg op regel 2 een extra `page` statement toe.
+
+```csharp
+@page "/todo/create"
+```
+
+5. Pas de `form-group` waarde buttons staan op regel 24 als volgt aan:
+
+```html
+<div class="form-group">
+    <button type="submit" class="btn btn-sm btn-primary" hidden="@(Id == null)"><i class="fas fa-save pr-2"></i>Save</button>
+    <button type="submit" class="btn btn-sm btn-success" hidden="@(Id != null)"><i class="fas fa-plus pr-2"></i>Create</button>
+    <a href="/todos" class="btn btn-sm btn-secondary"><i class="fas fa-times pr-2"></i>Cancel</a>
+</div>
+```
+
+6. Pas binnen het `@code` block op regel 38, de functie `HandleOnValidSubmit` als volgt aan:
+
+```csharp
+protected void HandleOnValidSubmit()
+{
+    try
+    {
+        if (Id != null)
+        {
+            _todoService.Update(Todo);
+            _toastService.ShowSuccess("Todo successfully updated", "Succes!");
+        }
+        else
+        {
+            _todoService.Create(Todo);
+            _navigationManager.NavigateTo($"todo/details/{Todo.Id}");
+            _toastService.ShowSuccess("Todo successfully created", "Succes!");
+        }
+
+
+    }
+    catch (Exception ex)
+    {
+        _toastService.ShowError($"Error saving todo. Error: {ex.Message}");
+    }
+}
+```
+
+
+
+
+
+
+
+

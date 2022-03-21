@@ -1,4 +1,5 @@
 ﻿@page "/todo/details/{Id:int}"
+@page "/todo/create"
 
 @using DataAccess.Models
 @using Services
@@ -21,7 +22,8 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn-primary">Save</button>
+            <button type="submit" class="btn btn-sm btn-primary" hidden="@(Id == null)"><i class="fas fa-save pr-2"></i>Save</button>
+            <button type="submit" class="btn btn-sm btn-success" hidden="@(Id != null)"><i class="fas fa-plus pr-2"></i>Create</button>
             <a href="/todos" class="btn btn-sm btn-secondary"><i class="fas fa-times pr-2"></i>Cancel</a>
         </div>
         @if (Id != null)
@@ -50,8 +52,18 @@
     {
         try
         {
-            _todoService.Update(Todo);
-            _toastService.ShowSuccess("Todo successfully updated", "Succes!");
+            if (Id != null)
+            {
+                _todoService.Update(Todo);
+                _toastService.ShowSuccess("Todo successfully updated", "Succes!");
+            }
+            else
+            {
+                _todoService.Create(Todo);
+                _navigationManager.NavigateTo($"todo/details/{Todo.Id}");
+                _toastService.ShowSuccess("Todo successfully created", "Succes!");
+            }
+            
 
         } 
         catch (Exception ex)
