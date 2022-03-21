@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Todo.Blazor.Data;
 using Todo.Blazor.Services;
 using Blazored.Toast;
+using Blazored.Modal;
 
 namespace Todo.Blazor
 {
@@ -35,6 +36,7 @@ namespace Todo.Blazor
             services.AddEntityFrameworkSqlite().AddDbContext<ApplicationDbContext>();
             services.AddScoped<IToDoService, ToDoService>();
             services.AddBlazoredToast();
+            services.AddBlazoredModal();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
