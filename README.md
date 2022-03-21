@@ -717,7 +717,7 @@ services.AddBlazoredModal();
 
 16. Voeg als laatste stap de volgende functie toe:
 
-```charp
+```csharp
 private async Task ShowConfirmationModal()
 {
     var parameters = new ModalParameters();
