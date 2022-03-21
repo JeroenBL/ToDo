@@ -4,10 +4,11 @@
 @using Services
 
 @inject IToDoService _todoService
+@inject IToastService _toastService
 @inject NavigationManager _navigationManager
 
 <div class="container d-flex justify-content-center m-0 p-0">
-    <EditForm Model="@Todo" class="col-sm-12 col-md-10 col-lg-8 p-0">
+    <EditForm Model="@Todo" OnValidSubmit="HandleOnValidSubmit" class="col-sm-12 col-md-10 col-lg-8 p-0">
 
         <div class="form-group">
             <label for="title">Title</label>
@@ -20,6 +21,7 @@
         </div>
 
         <div class="form-group">
+            <button type="submit" class="btn-primary">Save</button>
             <a href="/todos" class="btn btn-sm btn-secondary"><i class="fas fa-times pr-2"></i>Cancel</a>
         </div>
         @if (Id != null)
@@ -41,6 +43,20 @@
         if (Id != null)
         {
             Todo = _todoService.Get(Id.Value);
+        }
+    }
+
+    protected void HandleOnValidSubmit()
+    {
+        try
+        {
+            _todoService.Update(Todo);
+            _toastService.ShowSuccess("Todo successfully updated", "Succes!");
+
+        } 
+        catch (Exception ex)
+        {
+            _toastService.ShowError($"Error saving todo. Error: {ex.Message}");
         }
     }
 }

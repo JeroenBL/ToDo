@@ -509,3 +509,48 @@ private void RedirectTo(int todoId)
     - `oi oi-plus` naar: `fa-solid fa-calculator pr-3`
     - `oi oi-list-rich` naar: `fa-solid fa-list pr-3`
     - `oi oi-task` naar: `fa-solid fa-clipboard-check pr-3`
+
+# Stap 12 - Implementeer update mogelijkheid
+
+1. Open file `Pages\Todo\TodoDetails.razor`
+
+2. Voeg een extra `@inject` statement toe op regel 7.
+
+```charp
+@inject IToastService _toastService
+```
+
+3. Pas de regel `<EditForm Model="@Todo" class="col-sm-12 col-md-10 col-lg-8 p-0">` regelnummer 11 als volgt aan:
+
+```csharp
+<EditForm Model="@Todo" OnValidSubmit="HandleOnValidSubmit" class="col-sm-12 col-md-10 col-lg-8 p-0">
+```
+
+4. Voeg toe op regel 24 (binnen de `div- class="formg-group"`)
+
+```csharp
+<button type="submit" class="btn-primary">Save</button>
+```
+
+> Er komt naast de `cancel` button dus een extra button bij.
+
+5. Binnen het `@code{}` block op regel 36, voeg de volgende functie toe:
+
+```
+protected void HandleOnValidSubmit()
+{
+    try
+    {
+        _todoService.Update(Todo);
+        _toastService.ShowSuccess("Todo successfully updated", "Succes!");
+
+    }
+    catch (Exception ex)
+    {
+        _toastService.ShowError($"Error saving todo. Error: {ex.Message}");
+    }
+}
+```
+
+![todoDetailsUpdate](./assets/TodoDetailsUpdate.png)
+
