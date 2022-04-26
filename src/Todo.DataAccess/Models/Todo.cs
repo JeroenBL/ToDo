@@ -7,7 +7,7 @@ namespace Todo.DataAccess.Models
     public class ToDo
     {
         // Het Id (mits exact zo geschreven) wordt de primary key in de database
-        public int Id { get; set; }
+        public int Id { get; set; }      
         public string Title { get; set; }
         public string Description { get; set; }
         public string DateCreated { get; set; }
