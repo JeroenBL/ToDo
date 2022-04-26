@@ -33,10 +33,9 @@ namespace Todo.Blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
-            services.AddEntityFrameworkSqlite().AddDbContext<ApplicationDbContext>();
-            services.AddScoped<IToDoService, ToDoService>();
-            services.AddBlazoredToast();
-            services.AddBlazoredModal();
+            
+            services.RegisterMyServices();
+            services.RegisterCustomLibraries();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
